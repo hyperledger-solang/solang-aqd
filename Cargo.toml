@@ -1,0 +1,16 @@
+[workspace]
+members = ["crates/*"]
+
+resolver = "2"
+
+# Patching aes-gcm-siv to be:
+# - compatible with solana crates (require aes-gcm-siv v^0.10.3)
+# - compatible with contract-extrinsics (require subtle v2)
+# This commit includes aes-gcm-siv v0.10.3 and removes pinning to subtle (>=2, <2.5)
+[patch.crates-io.aes-gcm-siv]
+git = "https://github.com/RustCrypto/AEADs"
+rev = "e1e35e0c4f4943da0a99ceb8477c421dcfae2c33"
+
+[patch.crates-io.curve25519-dalek]
+git = "https://github.com/solana-labs/curve25519-dalek.git"
+rev = "c14774464c4d38de553c6ef2f48a10982c1b4801"

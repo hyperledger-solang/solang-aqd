@@ -106,8 +106,8 @@ pub async fn test_flipper_get_accounts() -> Result<()> {
     // No new accounts are created.
     assert_eq!(new_accounts.len(), 0);
     // The data account is not signable nor mutable.
-    assert_eq!(accounts[0].is_signer, false);
-    assert_eq!(accounts[0].is_writable, false);
+    assert!(!accounts[0].is_signer);
+    assert!(!accounts[0].is_writable);
 
     Ok(())
 }
@@ -149,8 +149,8 @@ pub async fn test_flipper_flip_accounts() -> Result<()> {
     // No new accounts are created.
     assert_eq!(new_accounts.len(), 0);
     // The data account is not signable but mutable.
-    assert_eq!(accounts[0].is_signer, false);
-    assert_eq!(accounts[0].is_writable, true);
+    assert!(!accounts[0].is_signer);
+    assert!(accounts[0].is_writable);
 
     Ok(())
 }

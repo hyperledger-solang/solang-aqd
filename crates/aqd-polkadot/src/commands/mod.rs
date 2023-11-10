@@ -87,21 +87,19 @@ impl CLIExtrinsicOpts {
     /// Otherwise, it returns the URL provided by the user in the CLI options.
     pub fn url(&self) -> Url {
         if let Some(net) = &self.network {
-            match net {
-                Network::Rococo => Url::parse("wss://rococo-contracts-rpc.polkadot.io").unwrap(),
-                Network::PhalaPoC5 => Url::parse("wss://poc5.phala.network/ws").unwrap(),
-                Network::AstarShiden => Url::parse("wss://rpc.shiden.astar.network").unwrap(),
-                Network::AstarShibuya => Url::parse("wss://rpc.shibuya.astar.network").unwrap(),
-                Network::Astar => Url::parse("wss://rpc.astar.network").unwrap(),
-                Network::AlephZeroTestnet => Url::parse("wss://ws.test.azero.dev").unwrap(),
-                Network::AlephZero => Url::parse("wss://ws.azero.dev").unwrap(),
-                Network::T3RNT0RN => Url::parse("wss://ws.t0rn.io").unwrap(),
-                Network::PendulumTestnet => {
-                    Url::parse("wss://rpc-foucoco.pendulumchain.tech").unwrap()
-                }
-            }
-        } else {
-            self.url.clone()
+            return Url::parse(match net {
+                Network::Rococo => "wss://rococo-contracts-rpc.polkadot.io",
+                Network::PhalaPoC5 => "wss://poc5.phala.network/ws",
+                Network::AstarShiden => "wss://rpc.shiden.astar.network",
+                Network::AstarShibuya => "wss://rpc.shibuya.astar.network",
+                Network::Astar => "wss://rpc.astar.network",
+                Network::AlephZeroTestnet => "wss://ws.test.azero.dev",
+                Network::AlephZero => "wss://ws.azero.dev",
+                Network::T3RNT0RN => "wss://ws.t0rn.io",
+                Network::PendulumTestnet => "wss://rpc-foucoco.pendulumchain.tech",
+            })
+            .unwrap();
         }
+        self.url.clone()
     }
 }

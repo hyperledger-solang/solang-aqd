@@ -5,9 +5,6 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  # Run every Monday at 1:30 AM UTC
-  schedule:
-    - cron: '30 1 * * 1'
 
 jobs:
   build:
@@ -24,6 +21,10 @@ jobs:
         toolchain: stable
         override: true
         components: rustfmt, clippy
+
+    # Print Cargo version
+    - name: Print Cargo version
+      run: cargo --version
     
     # Install libudev (required for solana crates)
     - name: Install libudev
@@ -37,11 +38,11 @@ jobs:
 
     - name: Check linting
       run: |
-        cargo clippy
+        cargo clippy --workspace --all-features
 
     - name: Build and test
       run: |
-        cargo test
+        cargo test --workspace --all-features
 
   solana:
     name: Solana Integration Testing
@@ -63,16 +64,20 @@ jobs:
         toolchain: stable
         override: true
         components: rustfmt, clippy
+
+    # Print Cargo version
+    - name: Print Cargo version
+      run: cargo --version
     
     # Set up Solana CLI 
     - name: Set up Solana CLI
       working-directory: ./integration/solana
       run: ./setup_solana.sh
     
-    # Compile Aqd in release mode 
-    - name: Compile Aqd 
+    # Compile Aqd in release mode (solana feature)
+    - name: Compile Aqd for Solana target
       run: |
-        cargo build --features "solana" --release
+        cargo build --no-default-features --features "solana" --release
    
     # Run Solana integration tests
     - name: Test Solana CLI
@@ -98,6 +103,10 @@ jobs:
       with:
         toolchain: stable
         override: true
+
+    # Print Cargo version
+    - name: Print Cargo version
+      run: cargo --version
     
     - name: Start substrate-contracts-node
       run: |
@@ -108,10 +117,10 @@ jobs:
         # Run substrate-contracts-node
         nohup ./artifacts/substrate-contracts-node-linux/substrate-contracts-node --dev --rpc-external > substrate.out &
     
-    # Compile Aqd in release mode
-    - name: Compile Aqd 
+    # Compile Aqd in release mode (polkadot feature)
+    - name: Compile Aqd for Polkadot target
       run: |
-        cargo build --features "polkadot" --release
+        cargo build --no-default-features --features "polkadot" --release
     
     # Run Polkadot integration tests
     - name: Test Polkadot CLI

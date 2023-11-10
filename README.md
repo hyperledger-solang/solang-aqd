@@ -1,9 +1,12 @@
 # Solang Aqd - Smart Contract CLI Tool
-<img src="https://raw.githubusercontent.com/hyperledger/solang/main/docs/hl_solang_horizontal-color.svg" alt="Solang Logo" width="75%"/>
 
-[![Discord](https://img.shields.io/discord/905194001349627914?logo=Hyperledger&style=plastic)](https://discord.gg/hyperledger)
-[CI](https://github.com/hyperledger/solang-aqd/actions)
-[![license](https://img.shields.io/github/license/hyperledger/solang.svg)](LICENSE)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/hyperledger/solang/main/docs/hl_solang_horizontal-color.svg" alt="Solang Logo" width="75%" />
+
+  [![Discord](https://img.shields.io/discord/905194001349627914?logo=Hyperledger&style=plastic)](https://discord.gg/hyperledger)
+  [![CI](https://img.shields.io/github/workflow/status/hyperledger/solang-aqd/CI?label=CI&logo=GitHub)](https://github.com/hyperledger/solang-aqd/actions)
+  [![License](https://img.shields.io/github/license/hyperledger/solang.svg)](LICENSE)
+</div>
 
 `Aqd`(عَقد - meaning a contract in Arabic) is a versatile CLI tool for interacting with smart contracts on the Solana and Polkadot blockchains.
 It provides a user-friendly interface with commands for deploying smart contracts and calling specific functions on the deployed contracts.

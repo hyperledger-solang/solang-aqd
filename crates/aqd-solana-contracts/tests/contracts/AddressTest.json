@@ -1,0 +1,61 @@
+{
+  "version": "0.0.1",
+  "name": "AddressTest",
+  "instructions": [
+    {
+      "name": "addressData",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": "publicKey"
+    },
+    {
+      "name": "new",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": true,
+          "isSigner": true,
+          "isOptional": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true,
+          "isOptional": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [
+        {
+          "name": "initaddress",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "getAddressData",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": "publicKey"
+    }
+  ]
+}

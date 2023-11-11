@@ -1,0 +1,128 @@
+name: Aqd CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Sanity Check Codebase
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+        components: rustfmt, clippy
+
+    # Print Cargo version
+    - name: Print Cargo version
+      run: cargo --version
+    
+    # Install libudev (required for solana crates)
+    - name: Install libudev
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libudev-dev
+
+    - name: Check formatting
+      run: |
+        cargo fmt -- --check
+
+    - name: Check linting
+      run: |
+        cargo clippy --workspace --all-features
+
+    - name: Build and test
+      run: |
+        cargo test --workspace --all-features
+
+  solana:
+    name: Solana Integration Testing
+    runs-on: ubuntu-latest
+
+    steps:
+    # Install jq to parse JSON (used in shell scripts)
+    - name: Install jq 
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq libudev-dev
+
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+        components: rustfmt, clippy
+
+    # Print Cargo version
+    - name: Print Cargo version
+      run: cargo --version
+    
+    # Set up Solana CLI 
+    - name: Set up Solana CLI
+      working-directory: ./integration/solana
+      run: ./setup_solana.sh
+    
+    # Compile Aqd in release mode (solana feature)
+    - name: Compile Aqd for Solana target
+      run: |
+        cargo build --no-default-features --features "solana" --release
+   
+    # Run Solana integration tests
+    - name: Test Solana CLI
+      run: ./solana_cli.sh
+      working-directory: ./integration/solana
+
+  polkadot:
+    name: Polkadot Integration Testing
+    runs-on: ubuntu-latest
+
+    steps:
+    # Install jq to parse JSON (used in shell scripts)
+    - name: Install jq 
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq libudev-dev
+
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    # Print Cargo version
+    - name: Print Cargo version
+      run: cargo --version
+    
+    - name: Start substrate-contracts-node
+      run: |
+        # Download and extract the substrate-contracts-node binary
+        wget https://github.com/paritytech/substrate-contracts-node/releases/download/v0.33.0/substrate-contracts-node-linux.tar.gz
+        tar -xzvf substrate-contracts-node-linux.tar.gz
+    
+        # Run substrate-contracts-node
+        nohup ./artifacts/substrate-contracts-node-linux/substrate-contracts-node --dev --rpc-external > substrate.out &
+    
+    # Compile Aqd in release mode (polkadot feature)
+    - name: Compile Aqd for Polkadot target
+      run: |
+        cargo build --no-default-features --features "polkadot" --release
+    
+    # Run Polkadot integration tests
+    - name: Test Polkadot CLI
+      run: ./polkadot_cli.sh
+      working-directory: ./integration/polkadot

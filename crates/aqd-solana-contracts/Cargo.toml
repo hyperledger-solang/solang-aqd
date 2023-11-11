@@ -1,0 +1,36 @@
+[package]
+name = "aqd-solana-contracts"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+serde_json = "1.0.107"
+serde = "1.0.188"
+tokio = { version = "1", features = ["full"] }
+anyhow = "1.0.75"
+colored = "2.0.4"
+
+# Solana and Anchor Dependencies
+solana-clap-v3-utils = "1.17.2"
+solana-cli-config = "1.17.2"
+solana-client = "1.17.2"
+solana-transaction-status = "1.17.2"
+solana-sdk = "1.17.2"
+solana-cli = "1.17.2"
+solana-cli-output = "1.17.2"
+solana-rpc-client-api = "1.17.2"
+anchor-syn = { version = "0.28.0", features = ["idl"] }
+
+# Numeric Types and Encoding
+num-bigint = { version = "0.4", features = ["rand", "serde"] }
+base64 = "0.21.4"
+base58 = "0.2.0"
+hex = "0.4.3"
+convert_case = "0.6.0"
+byte-slice-cast = "1.2.2"
+sha2 = "0.10.8"
+num-traits = "0.2"
+
+# For Printing macros
+aqd-utils = { path = "../aqd-utils" }

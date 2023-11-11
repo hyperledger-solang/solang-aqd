@@ -1,0 +1,182 @@
+{
+  "version": "0.0.1",
+  "name": "DefinedTypes",
+  "instructions": [
+    {
+      "name": "personData",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": "personData_returns"
+      }
+    },
+    {
+      "name": "colorData",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": "Color"
+      }
+    },
+    {
+      "name": "new",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": true,
+          "isSigner": true,
+          "isOptional": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true,
+          "isOptional": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [
+        {
+          "name": "person",
+          "type": {
+            "defined": "Person"
+          }
+        }
+      ]
+    },
+    {
+      "name": "setColor",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [
+        {
+          "name": "color",
+          "type": {
+            "defined": "Color"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getPerson",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": "Person"
+      }
+    },
+    {
+      "name": "getColor",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": "Color"
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "Color",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Red"
+          },
+          {
+            "name": "Green"
+          },
+          {
+            "name": "Blue"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Person",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "age",
+            "type": "u8"
+          },
+          {
+            "name": "favoriteColor",
+            "type": {
+              "defined": "Color"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "personData_returns",
+      "docs": [
+        "Data structure to hold the multiple returns of function personData"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "age",
+            "type": "u8"
+          },
+          {
+            "name": "favoriteColor",
+            "type": {
+              "defined": "Color"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

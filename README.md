@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/hyperledger/solang/main/docs/hl_solang_horizontal-color.svg" alt="Solang Logo" width="75%" />
 
   [![Discord](https://img.shields.io/discord/905194001349627914?logo=Hyperledger&style=plastic)](https://discord.gg/hyperledger)
-  [![CI](https://img.shields.io/github/workflow/status/hyperledger/solang-aqd/CI?label=CI&logo=GitHub)](https://github.com/hyperledger/solang-aqd/actions)
+  [![CI](https://img.shields.io/github/actions/workflow/status/hyperledger/solang-aqd/test.yml?label=Aqd%20CI)](https://github.com/hyperledger/solang-aqd/actions)
   [![License](https://img.shields.io/github/license/hyperledger/solang.svg)](LICENSE)
 </div>
 
@@ -12,6 +12,8 @@
 It provides a user-friendly interface with commands for deploying smart contracts and calling specific functions on the deployed contracts.
 
 Whether you're developing on Solana or Polkadot, `Aqd` simplifies your smart contract interactions.
+
+> :warning: Note: Aqd currently does not support Polkadot smart contract interactions due to dependencies on unreleased cargo-contract / ink! versions. For additional information, refer to issue [#3](https://github.com/hyperledger/solang-aqd/issues/3).
 
 ## Usage  
 ### Installation  

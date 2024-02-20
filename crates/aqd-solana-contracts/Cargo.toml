@@ -12,14 +12,14 @@ anyhow = "1.0.75"
 colored = "2.0.4"
 
 # Solana and Anchor Dependencies
-solana-clap-v3-utils = "1.17.2"
-solana-cli-config = "1.17.2"
-solana-client = "1.17.2"
-solana-transaction-status = "1.17.2"
-solana-sdk = "1.17.2"
-solana-cli = "1.17.2"
-solana-cli-output = "1.17.2"
-solana-rpc-client-api = "1.17.2"
+solana-clap-v3-utils = "1.18.2"
+solana-cli-config = "1.18.2"
+solana-client = "1.18.2"
+solana-transaction-status = "1.18.2"
+solana-sdk = "1.18.2"
+solana-cli = "1.18.2"
+solana-cli-output = "1.18.2"
+solana-rpc-client-api = "1.18.2"
 anchor-syn = { version = "0.28.0", features = ["idl"] }
 
 # Numeric Types and Encoding

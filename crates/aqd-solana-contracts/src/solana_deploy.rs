@@ -46,7 +46,8 @@ where
     // Create a CLI command for program deployment and define signers
     let CliCommandInfo { command, signers } = CliCommandInfo {
         command: CliCommand::Program(ProgramCliCommand::Deploy {
-            program_location: Some(program_location.to_string()),
+            program_location: Some(program_location),
+            fee_payer_signer_index: 0,
             program_signer_index: None,
             program_pubkey: None,
             buffer_signer_index: None,
